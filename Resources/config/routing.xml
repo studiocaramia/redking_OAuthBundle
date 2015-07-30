@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="redking_oauth_auth_login" pattern="/oauth/v2/auth_login">  
+        <default key="_controller">RedkingOAuthBundle:Security:login</default>  
+    </route>  
+      
+    <route id="redking_oauth_auth_login_check" pattern="/oauth/v2/auth_login_check">  
+        <default key="_controller">RedkingOAuthBundle:Security:loginCheck</default>  
+    </route>
+
+    <route id="redking_oauth_get_code" pattern="/oauth/v2/get_code">
+        <default key="_controller">RedkingOAuthBundle:Security:getCode</default>
+    </route>
+
+    <route id="redking_oauth_facebook_get_token" pattern="/oauth/bridge/facebook">
+        <default key="_controller">RedkingOAuthBundle:Facebook:getToken</default>
+        <requirement key="_method">POST</requirement>
+        <requirement key="token">\w+</requirement>
+        <requirement key="id">\w+</requirement>
+    </route>
+</routes>

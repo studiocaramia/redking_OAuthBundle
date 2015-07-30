@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="sonata_user">
+                <source>sonata_user</source>
+                <target>Gestion Back Office</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_client_list">
+                <source>breadcrumb.link_client_list</source>
+                <target>Clients OAuth</target>
+            </trans-unit>
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="list.label_allowed_grant_types">
+                <source>list.label_allowed_grant_types</source>
+                <target>Type de récupérations authorisées</target>
+            </trans-unit>
+            <trans-unit id="list.label__action">
+                <source>list.label__action</source>
+                <target>Actions</target>
+            </trans-unit>
+
+            <trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="form.label_allowed_grant_types">
+                <source>form.label_allowed_grant_types</source>
+                <target>Type de récupérations authorisées</target>
+            </trans-unit>
+            <trans-unit id="form.label_redirect_uris">
+                <source>form.label_redirect_uris</source>
+                <target>Urls de redirections</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

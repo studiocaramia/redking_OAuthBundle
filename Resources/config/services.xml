@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="redking_oauth.facebook.class">Redking\Bundle\OAuthBundle\Bridge\Facebook</parameter>
+        <parameter key="redking_oauth.user.registration.class">Redking\Bundle\OAuthBundle\Util\UserRegistrator</parameter>
+        <parameter key="redking_oauth.oauth.manipulator.class">Redking\Bundle\OAuthBundle\Util\OAuthManipulator</parameter>
+    </parameters>
+
+    <services>  
+          
+        <service id="redking_oauth.authorize.form_type" class="Redking\Bundle\OAuthBundle\Form\Type\AuthorizeFormType">  
+        </service>  
+          
+        <service id="redking_oauth.authorize.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">  
+            <argument>redking_oauth_auth</argument>  
+            <argument type="service" id="redking_oauth.authorize.form_type" />  
+        </service>  
+          
+        <service id="redking_oauth.authorize.form_handler" class="Redking\Bundle\OAuthBundle\Form\Handler\AuthorizeFormHandler" scope="request">  
+            <argument type="service" id="redking_oauth.authorize.form" />  
+            <argument type="service" id="request" />  
+            <argument type="service" id="security.context" />  
+            <argument type="service" id="fos_oauth_server.server" />  
+        </service>
+
+        <!-- Gestionnaire de login success  -->
+        <service id="redking_oauth.redirect.after_succes" class="Redking\Bundle\OAuthBundle\Redirection\AfterLoginRedirection">
+            <argument type="service" id="router" />
+        </service>
+
+        <!-- Sonata Admin -->
+        <service id="redking_oauth.admin.client" class="Redking\Bundle\OAuthBundle\Admin\ClientAdmin">
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="sonata_user" label="Client Oauth" label_catalogue="RedkingOAuthBundle" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument />
+            <argument>Redking\Bundle\OAuthBundle\Document\Client</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>RedkingOAuthBundle</argument>
+            </call>
+        </service>
+
+        <!-- OAuth Manipulator -->
+        <service id="redking_oauth.oauth.manipulator" class="%redking_oauth.oauth.manipulator.class%">
+            <argument type="service" id="doctrine_mongodb" />
+            <argument>%redking_oauth.facebook.id%</argument>
+        </service>
+
+        <!-- Facebook SDK -->
+        <service id="redking_oauth.facebook" class="%redking_oauth.facebook.class%">
+            <argument>%redking_oauth.facebook.id%</argument>
+            <argument>%redking_oauth.facebook.secret%</argument>
+        </service>
+
+        <!-- Enregistre les users venant de sdk tiers -->
+        <service id="redking_oauth.user.registration" class="%redking_oauth.user.registration.class%">
+            <argument type="service" id="fos_user.user_manager" />
+            <argument type="service" id="fos_oauth_server.server" />
+            <argument type="service" id="redking_oauth.oauth.manipulator" />
+            <argument>%redking_oauth.user_ws_role%</argument>
+        </service>
+          
+     </services>
+</container>

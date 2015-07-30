@@ -1,0 +1,42 @@
+{% extends ['RedkingOAuthBundle::layout.html.twig'] %}
+
+{% form_theme form _self %}
+
+{% block title %}OAuth Authorization {% endblock %}
+{% block content_title %}Grant OAuth access to {{ client.getName }} ?{% endblock %}
+
+{% block content %}
+        <form class="form-inline" action="{{ url('fos_oauth_server_authorize', {
+            'client_id' : request.get('client_id'),
+            'response_type' : request.get('response_type'),
+            'redirect_uri' : request.get('redirect_uri'),
+            'state' : request.get('state'),
+            'scope' : request.get('scope')
+        }) }}" method="post">
+            
+            <div class="checkbox">
+                {{ form_widget(form) }}
+            </div>
+            <button type="submit" class="btn btn-success" name="_submit">Authorize</button>
+        </form>
+{% endblock content %}
+
+{% block form_row %}
+    {% set form_widget_content %}
+        {{ form_widget(form) }}
+    {% endset %}
+    {{ form_label(form, form.vars.label|default(null), {'widget' : form_widget_content} ) }}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% if widget %}
+        <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>
+            {{ widget|raw }}
+            <span>
+                {{- label|trans({}, translation_domain) -}}
+            </span>
+        </label>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock form_label %}

@@ -1,0 +1,27 @@
+{
+    "name": "redking/oauth-bundle",
+    "type": "symfony-bundle",
+    "description": "Integration of FOSOAuthServer : generation of client, user and tokens",
+    "keywords": [ "redking", "oauth2", "symfony2", "fos"],
+    "homepage": "http://www.redking.fr",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damien Matabon",
+            "homepage": "http://www.makemyweb.fr/",
+            "email": "damien.matabon@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.*",
+        "friendsofsymfony/oauth-server-bundle": "1.4.*@dev",
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "facebook/php-sdk-v4": "4.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": { "Redking\\Bundle\\OAuthBundle": "" }
+    },
+    "target-dir": "Redking/Bundle/OAuthBundle"
+}

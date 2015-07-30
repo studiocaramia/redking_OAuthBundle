@@ -1,0 +1,21 @@
+{% extends ['::base.html.twig'] %}
+
+{% block title %}OAuth{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style type="text/css">
+    body { padding-top:50px;}
+    .container h1 { text-align: center; margin-bottom: 40px;}
+    .container .content { max-width: 400px; margin: 10px auto;}
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{% block content_title %}OAuth{% endblock %}</h1>
+        <div class="content">
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+{% endblock body %}
